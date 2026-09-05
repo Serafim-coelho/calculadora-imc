@@ -1,0 +1,410 @@
+/* =========================
+   CONFIGURAÇÕES GERAIS
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(
+        135deg,
+        #667eea,
+        #764ba2
+    );
+
+    padding: 20px;
+}
+
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container {
+    width: 100%;
+    max-width: 450px;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.card {
+    background: white;
+
+    padding: 40px 35px;
+
+    border-radius: 20px;
+
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+
+    text-align: center;
+
+    animation: aparecer 0.6s ease;
+}
+
+
+/* =========================
+   TÍTULO
+========================= */
+
+h1 {
+    font-size: 32px;
+
+    color: #333;
+
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #777;
+
+    font-size: 15px;
+
+    margin-bottom: 30px;
+}
+
+
+/* =========================
+   FORMULÁRIO
+========================= */
+
+.form {
+    display: flex;
+
+    flex-direction: column;
+
+    text-align: left;
+}
+
+label {
+    font-size: 14px;
+
+    font-weight: bold;
+
+    color: #444;
+
+    margin-bottom: 8px;
+}
+
+input {
+    width: 100%;
+
+    padding: 14px;
+
+    border: 2px solid #e5e5e5;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+
+    outline: none;
+
+    margin-bottom: 20px;
+
+    transition: 0.3s;
+}
+
+input:focus {
+    border-color: #667eea;
+
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+}
+
+
+/* =========================
+   BOTÃO
+========================= */
+
+button {
+    width: 100%;
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        135deg,
+        #667eea,
+        #764ba2
+    );
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.35);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+
+/* =========================
+   RESULTADO
+========================= */
+
+.resultado {
+    margin-top: 25px;
+
+    padding: 20px;
+
+    border-radius: 12px;
+
+    background: #f5f6fa;
+
+    color: #555;
+
+    font-size: 15px;
+
+    transition: 0.3s;
+}
+
+.resultado strong {
+    display: block;
+
+    font-size: 28px;
+
+    color: #333;
+
+    margin-bottom: 8px;
+}
+
+
+/* =========================
+   ANIMAÇÃO
+========================= */
+
+@keyframes aparecer {
+
+    from {
+        opacity: 0;
+
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =========================
+   CELULAR
+========================= */
+
+@media (max-width: 500px) {
+
+    body {
+        padding: 15px;
+    }
+
+    .card {
+        padding: 30px 22px;
+    }
+
+    h1 {
+        font-size: 27px;
+    }
+
+}
+
+
+
+/* =========================
+   RESULTADO DO IMC
+========================= */
+
+.resultado-topo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-bottom: 15px;
+}
+
+.resultado-topo span {
+    font-size: 14px;
+
+    color: #777;
+
+    margin-bottom: 5px;
+}
+
+.resultado-topo strong {
+    font-size: 42px;
+
+    color: #333;
+}
+
+
+/* =========================
+   CLASSIFICAÇÃO
+========================= */
+
+.classificacao {
+    display: inline-block;
+
+    padding: 8px 18px;
+
+    border-radius: 20px;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    margin-bottom: 20px;
+}
+
+
+/* Cores das classificações */
+
+.classificacao.baixo {
+    background: #fff3cd;
+
+    color: #856404;
+}
+
+.classificacao.normal {
+    background: #d4edda;
+
+    color: #155724;
+}
+
+.classificacao.sobrepeso {
+    background: #ffe5b4;
+
+    color: #8a4b00;
+}
+
+.classificacao.obesidade {
+    background: #f8d7da;
+
+    color: #721c24;
+}
+
+
+/* =========================
+   BARRA DO IMC
+========================= */
+
+.barra-imc {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 5px;
+
+    margin-top: 10px;
+
+    margin-bottom: 25px;
+}
+
+.categoria {
+    padding: 10px 4px;
+
+    border-radius: 7px;
+
+    text-align: center;
+
+    font-size: 11px;
+
+    color: white;
+}
+
+.categoria span {
+    display: block;
+
+    font-weight: bold;
+
+    margin-bottom: 3px;
+}
+
+.categoria small {
+    font-size: 10px;
+}
+
+
+/* Categorias */
+
+.baixo-barra {
+    background: #f0ad4e;
+}
+
+.normal-barra {
+    background: #5cb85c;
+}
+
+.sobrepeso-barra {
+    background: #f0ad4e;
+}
+
+.obesidade-barra {
+    background: #d9534f;
+}
+
+
+/* =========================
+   BOTÃO NOVAMENTE
+========================= */
+
+.btn-novamente {
+    background: transparent;
+
+    color: #667eea;
+
+    border: 2px solid #667eea;
+
+    box-shadow: none;
+
+    margin-top: 5px;
+}
+
+.btn-novamente:hover {
+    background: #667eea;
+
+    color: white;
+
+    box-shadow: none;
+}
+
+
+/* =========================
+   ERRO
+========================= */
+
+.erro {
+    color: #c0392b;
+
+    font-weight: bold;
+
+    font-size: 14px;
+}
