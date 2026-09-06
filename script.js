@@ -1,6 +1,5 @@
 const SUPABASE_URL = "https://yufrahuljwwixxporwbu.supabase.co";
-
-const SUPABASE_KEY = "sb_publishable_NIxmPKE5JjG4KbtdfwpUyQ_A9u4-Ndi";
+const SUPABASE_KEY = "COLE_SUA_PUBLISHABLE_KEY_AQUI";
 
 const supabaseClient = window.supabase.createClient(
     SUPABASE_URL,
@@ -8,117 +7,51 @@ const supabaseClient = window.supabase.createClient(
 );
 
 async function calcularIMC() {
-      const peso = parseFloat(document.getElementById("peso").value);
-      const altura = parseFloat(document.getElementById("altura").value);
-      const resultado = document.getElementById("resultado");
+    const peso = parseFloat(document.getElementById("peso").value);
+    const altura = parseFloat(document.getElementById("altura").value);
+    const resultado = document.getElementById("resultado");
 
-    // Verificar se os campos estão preenchidos
     if (isNaN(peso) || isNaN(altura)) {
-        resultado.innerHTML = `
-            <div class="erro">
-                ⚠️ Preencha seu peso e sua altura.
-            </div>
-        `;
+        resultado.innerHTML = `<div class="erro">⚠️ Preencha seu peso e sua altura.</div>`;
         return;
     }
 
-    // Verificar valores inválidos
     if (peso <= 0 || altura <= 0) {
-
-        resultado.innerHTML = `
-            <div class="erro">
-                ⚠️ Digite valores maiores que zero.
-            </div>
-        `;
-
+        resultado.innerHTML = `<div class="erro">⚠️ Digite valores maiores que zero.</div>`;
         return;
     }
-
-
-    // Calcular IMC
 
     const imc = peso / (altura * altura);
     const imcFormatado = imc.toFixed(2);
 
-    // Salvar avaliação no Supabase
-    const { data, error } = await supabaseClient
-    .from("avaliacoes")
-    .insert([
-        {
-            peso: peso,
-            altura: altura,
-            imc: parseFloat(imcFormatado),
-            classificacao: classificacao
-        }
-    ]);
-
-if (error) {
-    console.error("Erro ao salvar no Supabase:", error);
-} else {
-    console.log("Avaliação salva com sucesso!", data);
-}
-
-    // Classificação
-
     let classificacao;
-
     let classe;
 
-
     if (imc < 18.5) {
-
         classificacao = "Abaixo do peso";
-
         classe = "baixo";
-
-    } 
-    
-    else if (imc < 25) {
-
+    } else if (imc < 25) {
         classificacao = "Peso normal";
-
         classe = "normal";
-
-    } 
-    
-    else if (imc < 30) {
-
+    } else if (imc < 30) {
         classificacao = "Sobrepeso";
-
         classe = "sobrepeso";
-
-    } 
-    
-    else {
-
+    } else {
         classificacao = "Obesidade";
-
         classe = "obesidade";
     }
 
-
-    // Mostrar resultado
-
     resultado.innerHTML = `
-
         <div class="resultado-topo">
-
             <span>Seu IMC</span>
-
             <strong>${imcFormatado}</strong>
-
         </div>
-
 
         <div class="classificacao ${classe}">
-
             ${classificacao}
-
         </div>
 
-
         <div class="barra-imc">
-
             <div class="categoria baixo-barra">
                 <span>&lt; 18.5</span>
                 <small>Abaixo</small>
@@ -138,32 +71,36 @@ if (error) {
                 <span>30+</span>
                 <small>Obesidade</small>
             </div>
-
         </div>
 
-
         <button class="btn-novamente" onclick="recalcular()">
-
             Calcular novamente
-
         </button>
-
     `;
+
+    const { data, error } = await supabaseClient
+        .from("avaliacoes")
+        .insert([
+            {
+                peso: peso,
+                altura: altura,
+                imc: parseFloat(imcFormatado),
+                classificacao: classificacao
+            }
+        ]);
+
+    if (error) {
+        console.error("Erro ao salvar no Supabase:", error);
+    } else {
+        console.log("Avaliação salva com sucesso!", data);
+    }
 }
 
-
 function recalcular() {
-
     document.getElementById("peso").value = "";
-
     document.getElementById("altura").value = "";
-
     document.getElementById("resultado").innerHTML = `
-
         <p>Digite seu peso e sua altura para calcular.</p>
-
     `;
-
     document.getElementById("peso").focus();
-
 }
