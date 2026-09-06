@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Avaliações - IMC</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<main class="painel">
+
+    <header class="cabecalho">
+        <div>
+            <h1>Avaliações de IMC</h1>
+            <p>Acompanhamento das avaliações em tempo real</p>
+        </div>
+        <div class="status">
+            <span class="status-ponto"></span>
+            <span>Online</span>
+        </div>
+    </header>
+
+    <section class="resumo">
+        <div class="card-resumo">
+            <span class="icone">📊</span>
+            <div>
+                <small>Total de avaliações</small>
+                <strong id="totalAvaliacoes">0</strong>
+            </div>
+        </div>
+
+        <div class="card-resumo normal">
+            <span class="icone">🟢</span>
+            <div>
+                <small>Peso normal</small>
+                <strong id="totalNormal">0</strong>
+            </div>
+        </div>
+
+        <div class="card-resumo sobrepeso">
+            <span class="icone">🟡</span>
+            <div>
+                <small>Sobrepeso</small>
+                <strong id="totalSobrepeso">0</strong>
+            </div>
+        </div>
+
+        <div class="card-resumo obesidade">
+            <span class="icone">🔴</span>
+            <div>
+                <small>Obesidade</small>
+                <strong id="totalObesidade">0</strong>
+            </div>
+        </div>
+    </section>
+
+    <section class="ultima-avaliacao">
+        <div class="titulo-secao">
+            <div>
+                <h2>Última avaliação</h2>
+                <p>Resultado mais recente registrado</p>
+            </div>
+            <span id="horarioUltima">--:--</span>
+        </div>
+
+        <div class="resultado-destaque">
+            <div class="dado">
+                <span>Peso</span>
+                <strong id="ultimoPeso">-- kg</strong>
+            </div>
+
+            <div class="dado">
+                <span>Altura</span>
+                <strong id="ultimaAltura">-- m</strong>
+            </div>
+
+            <div class="dado principal">
+                <span>IMC</span>
+                <strong id="ultimoIMC">--</strong>
+            </div>
+
+            <div class="classificacao" id="ultimaClassificacao">
+                Aguardando avaliação
+            </div>
+        </div>
+    </section>
+
+    <section class="historico">
+        <div class="titulo-secao">
+            <div>
+                <h2>Últimas avaliações</h2>
+                <p>Dados registrados no sistema</p>
+            </div>
+        </div>
+
+        <div class="tabela-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Horário</th>
+                        <th>Peso</th>
+                        <th>Altura</th>
+                        <th>IMC</th>
+                        <th>Classificação</th>
+                    </tr>
+                </thead>
+                <tbody id="tabelaAvaliacoes">
+                    <tr>
+                        <td colspan="5">Carregando avaliações...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <footer>
+        <span>Atualização automática</span>
+        <span id="ultimaAtualizacao">Última atualização: --:--:--</span>
+    </footer>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
