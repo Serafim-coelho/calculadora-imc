@@ -77,24 +77,44 @@ async function calcularIMC() {
             Calcular novamente
         </button>
     `;
-
-    const { data, error } = await supabaseClient
+    const { data: existente, error: erroBusca } = await supabaseClient
         .from("avaliacoes")
-        .insert([
-            {
-                peso: peso,
-                altura: altura,
-                imc: parseFloat(imcFormatado),
-                classificacao: classificacao
-            }
-        ]);
+        .select("id")
+        .eq("peso", peso)
+        .eq("altura", altura)
+        .limit(1);
 
-    if (error) {
-        console.error("Erro ao salvar no Supabase:", error);
-    } else {
-        console.log("Avaliação salva com sucesso!", data);
+    if (erroBusca) {
+        console.error("Erro ao verificar avaliação:", erroBusca);
+            return;
     }
-}
+
+    if (existente && existente.length > 0) {
+        resultado.innerHTML += `
+            <div class="erro">
+                ⚠️ Essa avaliação já foi cadastrada!
+            </div>
+        `;
+        return;
+    }
+
+        const { data, error } = await supabaseClient
+            .from("avaliacoes")
+            .insert([
+                {
+                    peso: peso,
+                    altura: altura,
+                    imc: parseFloat(imcFormatado),
+                    classificacao: classificacao
+                }
+            ]);
+
+        if (error) {
+            console.error("Erro ao salvar no Supabase:", error);
+        } else {
+            console.log("Avaliação salva com sucesso!", data);
+        }
+    }
 
 function recalcular() {
     document.getElementById("peso").value = "";
