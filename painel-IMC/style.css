@@ -247,3 +247,31 @@ footer {
         gap: 8px;
     }
 }
+
+
+.btn-voltar {
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 45px;
+    padding: 12px 20px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    text-decoration: none;
+    font-size: 26px;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+.btn-voltar:hover {
+    background: rgba(255, 255, 255, 0.16);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateX(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.btn-voltar:active {
+    transform: translateX(0);
+}
