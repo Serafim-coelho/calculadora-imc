@@ -1,5 +1,5 @@
 const SUPABASE_URL = "https://yufrahuljwwixxporwbu.supabase.co";
-const SUPABASE_KEY = "COLE_SUA_PUBLISHABLE_KEY_AQUI";
+const SUPABASE_KEY = "sb_publishable_NIxmPKE5JjG4KbtdfwpUyQ_A9u4-Ndi";
 
 const supabaseClient = window.supabase.createClient(
     SUPABASE_URL,
