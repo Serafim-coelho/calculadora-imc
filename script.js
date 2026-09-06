@@ -1,27 +1,28 @@
-function calcularIMC() {
+const SUPABASE_URL = "https://yufrahuljwwixxporwbu.supabase.co";
 
-    const peso = parseFloat(document.getElementById("peso").value);
-    const altura = parseFloat(document.getElementById("altura").value);
+const SUPABASE_KEY = "sb_publishable_NIxmPKE5JjG4KbtdfwpUyQ_A9u4-Ndi";
 
-    const resultado = document.getElementById("resultado");
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
 
+async function calcularIMC() {
+      const peso = parseFloat(document.getElementById("peso").value);
+      const altura = parseFloat(document.getElementById("altura").value);
+      const resultado = document.getElementById("resultado");
 
     // Verificar se os campos estão preenchidos
-
     if (isNaN(peso) || isNaN(altura)) {
-
         resultado.innerHTML = `
             <div class="erro">
                 ⚠️ Preencha seu peso e sua altura.
             </div>
         `;
-
         return;
     }
 
-
     // Verificar valores inválidos
-
     if (peso <= 0 || altura <= 0) {
 
         resultado.innerHTML = `
@@ -37,9 +38,25 @@ function calcularIMC() {
     // Calcular IMC
 
     const imc = peso / (altura * altura);
-
     const imcFormatado = imc.toFixed(2);
 
+    // Salvar avaliação no Supabase
+    const { data, error } = await supabaseClient
+    .from("avaliacoes")
+    .insert([
+        {
+            peso: peso,
+            altura: altura,
+            imc: parseFloat(imcFormatado),
+            classificacao: classificacao
+        }
+    ]);
+
+if (error) {
+    console.error("Erro ao salvar no Supabase:", error);
+} else {
+    console.log("Avaliação salva com sucesso!", data);
+}
 
     // Classificação
 
