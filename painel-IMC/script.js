@@ -30,6 +30,10 @@ async function carregarAvaliacoes() {
 function atualizarResumo(avaliacoes) {
     document.getElementById("totalAvaliacoes").textContent = avaliacoes.length;
 
+    const abaixo = avaliacoes.filter(
+        item => (item.classificacao || "").toLowerCase().includes("abaixo")
+    ).length;
+
     const normal = avaliacoes.filter(
         item => item.classificacao === "Peso normal"
     ).length;
@@ -42,6 +46,7 @@ function atualizarResumo(avaliacoes) {
         item => item.classificacao === "Obesidade"
     ).length;
 
+    document.getElementById("totalAbaixo").textContent = abaixo;
     document.getElementById("totalNormal").textContent = normal;
     document.getElementById("totalSobrepeso").textContent = sobrepeso;
     document.getElementById("totalObesidade").textContent = obesidade;

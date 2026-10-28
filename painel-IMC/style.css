@@ -55,7 +55,7 @@ body {
 
 .resumo {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 20px;
     margin-bottom: 25px;
 }
@@ -69,6 +69,10 @@ body {
     align-items: center;
     gap: 18px;
     backdrop-filter: blur(12px);
+}
+
+.card-resumo.abaixo {
+    border-color: rgba(59, 130, 246, 0.5);
 }
 
 .card-resumo .icone {

@@ -6,6 +6,12 @@ const supabaseClient = window.supabase.createClient(
     SUPABASE_KEY
 );
 
+// Limites aceitos (ajuste se quiser)
+const PESO_MIN = 10;     // kg
+const PESO_MAX = 200;    // kg
+const ALTURA_MIN = 0.5;  // m
+const ALTURA_MAX = 2.5;  // m
+
 async function calcularIMC() {
     const peso = parseFloat(document.getElementById("peso").value);
     const altura = parseFloat(document.getElementById("altura").value);
@@ -16,8 +22,13 @@ async function calcularIMC() {
         return;
     }
 
-    if (peso <= 0 || altura <= 0) {
-        resultado.innerHTML = `<div class="erro">⚠️ Digite valores maiores que zero.</div>`;
+    if (peso < PESO_MIN || peso > PESO_MAX) {
+        resultado.innerHTML = `<div class="erro">⚠️ Digite um peso entre ${PESO_MIN} e ${PESO_MAX} kg.</div>`;
+        return;
+    }
+
+    if (altura < ALTURA_MIN || altura > ALTURA_MAX) {
+        resultado.innerHTML = `<div class="erro">⚠️ Digite uma altura entre ${ALTURA_MIN} e ${ALTURA_MAX} m.</div>`;
         return;
     }
 
